@@ -5,4 +5,5 @@ distribute==0.6.27
 wsgiref==0.1.2
 flask-sqlalchemy
 psycopg2
+python-dateutil
 
