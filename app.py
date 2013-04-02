@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask import request
+import dateutil.parser
 
 from flask.ext.sqlalchemy import SQLAlchemy
 
@@ -22,6 +23,7 @@ class WaterTest(db.Model):
         self.device_id = device_id
         self.test_id = test_id
         self.test_type = test_type
+        self.test_time = dateutil.parser.parse(test_time)
         self.test_result = test_result
         self.latitude = latitude
         self.longitude = longitude
@@ -50,7 +52,7 @@ def post():
         pass
     
     try:
-        wt = WaterTest(device_id, test_id, test_type, test_time, test_result, long(latitude), long(longitude))
+        wt = WaterTest(device_id, test_id, test_type, test_time, test_result, float(latitude), float(longitude))
         db.session.add(wt)
         db.session.commit()
     except Exception, e:
